@@ -46,7 +46,11 @@ const Squads = ({ navigation }) => {
 					style={styles.headerImage}
 				/>
 			</View>
-			<ScrollView showsVerticalScrollIndicator={false}>
+			<ScrollView
+				showsVerticalScrollIndicator={false}
+				nestedScrollEnabled={true}
+				style={{ width: "100%" }}
+			>
 				<View style={styles.mainContainer}>
 					<View style={styles.searchInputContainer}>
 						<Ionicons
@@ -98,22 +102,18 @@ const Squads = ({ navigation }) => {
 							</View>
 						))}
 					</View>
-					<View style={{ marginTop: 20 }}>
-						<FlatList
-							keyExtractor={(item) => item.id}
-							data={filteredPlayers}
-							renderItem={({ item }) => (
-								<View>
-									{item.player.map((x) => (
-										<PlayerCard
-											key={x.id}
-											player={x}
-											navigation={navigation}
-										/>
-									))}
-								</View>
-							)}
-						/>
+					<View style={{ marginTop: 20, flex: 1 }}>
+						{filteredPlayers.map((item) => (
+							<View key={item.id}>
+								{item.player.map((x) => (
+									<PlayerCard
+										key={x.id}
+										player={x}
+										navigation={navigation}
+									/>
+								))}
+							</View>
+						))}
 					</View>
 				</View>
 			</ScrollView>
